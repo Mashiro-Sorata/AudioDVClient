@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ordinal_Scale_battle_Top</title>
+    <style>
+    body {
+      /*background: #333;*/
+      text-align:center;
+      overflow: none;
+    }
+
+    @keyframes turn1{
+      0%{-webkit-transform:rotate(0deg);}
+      25%{-webkit-transform:rotate(90deg);}
+      50%{-webkit-transform:rotate(180deg);}
+      75%{-webkit-transform:rotate(270deg);}
+      100%{-webkit-transform:rotate(360deg);}
+    }
+
+    @keyframes turn2{
+      0%{-webkit-transform:rotate(-140deg);}
+      50%{-webkit-transform:rotate(220deg);}
+      100%{-webkit-transform:rotate(-140deg);}
+    }
+
+    @keyframes turn3{
+      0%{-webkit-transform:rotate(0deg);}
+      25%{-webkit-transform:rotate(-90deg);}
+      50%{-webkit-transform:rotate(-180deg);}
+      75%{-webkit-transform:rotate(-270deg);}
+      100%{-webkit-transform:rotate(-360deg);}
+    }
+
+    @keyframes turn4{
+      0%{-webkit-transform:rotate(-70deg);}
+      50%{-webkit-transform:rotate(290deg);}
+      100%{-webkit-transform:rotate(-70deg);}
+    }
+
+    .container {
+      text-align: center;
+      position: static;
+      overflow: hidden;
+    }
+
+    #cvs {
+      position: absolute;
+      z-index: 1;
+      left: 0px;
+    }
+
+    .png {
+      margin: -1px;
+    }
+
+    #png1 {
+      position: absolute;
+      z-index: 2;
+      animation: turn1 1.5s linear infinite;
+    }
+
+    #png2 {
+      position: absolute;
+      z-index: 3;
+      -webkit-animation: turn2 2.5s ease-in-out infinite;
+      transform: rotate(-140deg);
+    }
+
+    #png3 {
+      position: absolute;
+      z-index: 4;
+      -webkit-animation: turn1 2.8s linear infinite;
+      transform: rotate(20deg);
+    }
+
+    #png4 {
+      position: absolute;
+      z-index: 5;
+      animation: turn3 2s linear infinite;
+      transform: rotate(90deg);
+    }
+
+    #png5 {
+      position: absolute;
+      z-index: 6;
+      -webkit-animation: turn4 2.3s ease-in-out infinite;
+      transform: rotate(-70deg);
+    }
+
+    #png6 {
+      position: absolute;
+      z-index: 7;
+    }
+
+    </style>
+</head>
+<body>
+
+  <div class="container" align="center" >
+    <canvas id="cvs"></canvas>
+    <img id="png1" class="png" src="img/1.png" alt="">
+    <img id="png2" class="png" src="img/2.png" alt="">
+    <img id="png3" class="png" src="img/3.png" alt="">
+    <img id="png4" class="png" src="img/4.png" alt="">
+    <img id="png5" class="png" src="img/5.png" alt="">
+    <img id="png6" class="png" src="img/6.png" alt="">
+  </div>
+  <script type="text/javascript">
+    var pngs = document.getElementsByClassName("png");
+    var cvs = document.getElementById("cvs");
+    var ctx = cvs.getContext("2d"); 
+    var size = 4; 
+    // var size = 20;
+    var K = 2;
+    window.onresize = function () {
+      for (var i=0; i < pngs.length; i++) {
+        pngs[i].style.width = size*window.innerWidth/100 + "px";
+        pngs[i].style.left = (50-size/2)*window.innerWidth/100 + "px";
+        pngs[i].style.top = 0.38*window.innerHeight + "px";
+      }
+      cvs.width = window.innerWidth;  
+      cvs.height = 0.6*window.innerHeight;
+
+      ctx.shadowBlur = 1;
+      ctx.shadowColor = "#fac0ca";
+
+      ctx.strokeStyle = 'rgba(248,248,255,0.9)';
+      ctx.lineWidth = 2;
+
+      ctx.moveTo(0,0);
+      ctx.beginPath();
+
+      var x, y;
+      for (var i=-K; i<=0; i+=0.01) {
+        if (i > -3*size*0.01) {
+          continue;
+        }
+        x = cvs.width*((i+K)/(K*2));
+        y = (cvs.height)/2;
+        ctx.transform(1, (-i+K)*0.095/(2*K), 0, 1, 0, 0);
+        ctx.lineTo(x, y);
+        ctx.resetTransform();
+      }
+      ctx.stroke();
+
+      ctx.moveTo(0,0);
+      ctx.beginPath();
+      var x, y;
+      for (var i=0; i<=K; i+=0.01) {
+        if (i < 3*size*0.01) {
+          continue;
+        }
+        x = cvs.width*((i+K)/(K*2));
+        y = (cvs.height)/2;
+        ctx.transform(1, (-i+K)*0.095/(2*K), 0, 1, 0, 0);
+        ctx.lineTo(x, y);
+        ctx.resetTransform();
+      }
+      ctx.stroke();
+  };  
+  window.onresize();
+  </script>
+</body>
+</html>
