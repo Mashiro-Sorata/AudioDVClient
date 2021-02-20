@@ -163,8 +163,8 @@ SAOWave.prototype = {
 		this.phase = (this.phase+this.speed)%(Math.PI*64);
 		this._clear();
 		this._drawLine((this.MAX-this.noise)*5*this.trebleAm, 'rgba(65,105,225,1)', 1.5, this.phase+this.treblePhase);
-		this._drawLine((this.MAX-this.noise)*0.8*this.bassAm, 'rgba(220,20,60,1)', 1.5, this.phase+this.bassPhase+0.8);
-		this._drawLine((this.MAX-this.noise)*2*this.altoAm, 'rgba(248,248,255,1)', 2, this.phase+this.altoPhase+0.4);
+		this._drawLine((this.MAX-this.noise)*0.85*this.bassAm, 'rgba(220,20,60,1)', 1.5, this.phase+this.bassPhase+0.8);
+		this._drawLine((this.MAX-this.noise)*2.2*this.altoAm, 'rgba(248,248,255,1)', 2, this.phase+this.altoPhase+0.4);
 	},
 
 	tick: function() {
